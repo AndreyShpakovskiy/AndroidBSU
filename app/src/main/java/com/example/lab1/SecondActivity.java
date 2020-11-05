@@ -20,19 +20,23 @@ public class SecondActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_second);
+        setContentView(R.layout.activity_main);
         firstnum=getIntent().getIntExtra("number",0);
         textview=(TextView) findViewById(R.id.textView);
         textview.setText(String.valueOf(firstnum));
-        btnActOne = (Button) findViewById(R.id.btnActOne);
+        btnActOne = (Button) findViewById(R.id.btnActTwo);
         btnActOne.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 numText=findViewById(R.id.number);
                 int number = Integer.parseInt(numText.getText().toString());
                 sum=number+firstnum;
-                Intent intent = new Intent(SecondActivity.this, MainActivity.class);
+                Intent returnIntent = new Intent();
+                returnIntent.putExtra("result", sum);
+                setResult(RESULT_OK, returnIntent);
+                finish();
+                /*Intent intent = new Intent(SecondActivity.this, MainActivity.class);
                 intent.putExtra("number", sum);
-                startActivity(intent);
+                startActivity(intent);*/
             }
         });
     }
